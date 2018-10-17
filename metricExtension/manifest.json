@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Metric Extension",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": ["content.js"]
+    }
+  ],
+    "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "web_accessible_resources" : ["window_reader.js"]
+}

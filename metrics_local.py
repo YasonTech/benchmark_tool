@@ -46,14 +46,17 @@ totalMem = []
 maxMem = []
 
 log_count = 0
-log_max = 1000
+end_seen = False
 sleep(4)
-while log_count < log_max:
+while not end_seen:
     sleep(1)
     print log_count
     for entry in driver.get_log('browser'):
         data = entry['message']
         sig = 'heap data='
+        if "done!" in data:
+            end_seen = True
+            break
         if sig in data:
             index = data.index(sig)
             offset = len(sig)
@@ -62,8 +65,7 @@ while log_count < log_max:
             totalMem.append(int(vals[1]))
             maxMem.append(int(vals[2]))
             log_count += 1
-            if log_count >= log_max:
-                break
+            
         
 t = np.asarray(xrange(len(usedMem)))
 

@@ -1,4 +1,4 @@
-var count = 8000
+var count = 5000
 var mem_readings = []
 var func
 function readMem(){
@@ -13,6 +13,7 @@ function readMem(){
     }
 
     else{
+        console.log("done!")
         clearInterval(func);
     }
 }

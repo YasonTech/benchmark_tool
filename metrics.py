@@ -5,14 +5,29 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from time import sleep
 import Tkinter
 import sys
+import os
+import argparse
 import numpy as np
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 
+base_dir = os.path.dirname(os.path.realpath(__file__))
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-f","--file_path")
+parser.add_argument("-u","--url")
+args = parser.parse_args()
+
 if len(sys.argv) > 1:
-    url = sys.argv[1]
+    if args.url:
+        url = args.url
+    elif args.file_path:
+        abs_path = os.path.abspath(args.file_path)
+        url = "file:///"+abs_path
+    else: 
+        sys.exit("expected either --url or --file_path arg")
 else:
-    url = "http://reddit.com"
+    url = "https://google.com"
 
 driver = webdriver.Chrome()
 driver.get(url)
@@ -24,7 +39,8 @@ print ("load time: " + str(execution_time/1000.0))
 chrome_options = Options()
 caps = DesiredCapabilities.CHROME
 caps['loggingPrefs'] = { 'browser':'ALL' }
-chrome_options.add_extension("metricExtension.crx")
+
+chrome_options.add_extension(base_dir + "/metricExtension.crx")
 chrome_options.add_argument("--enable-precise-memory-info")
 driver = webdriver.Chrome(chrome_options=chrome_options,desired_capabilities=caps)
 
@@ -33,8 +49,6 @@ execution_time = driver.execute_script("return performance.timing.loadEventEnd -
 
 print ("milliseconds with injected mem usage script:" + str(execution_time))
 
-# driver.execute_script("window.localStorage.setItem('seconds','4000');")
-# driver.get(url)
 heap_status = driver.execute_script("return window.performance.memory;")
 
 print ("heap_status:" + str(heap_status))
@@ -67,6 +81,7 @@ t = np.asarray(xrange(len(usedMem)))
 
 print "run time with extenion: " + str(execution_time) + "ms"
 
+# generate consumption graph
 plt.plot(t, usedMem, 'b-', t, totalMem, 'r--')
 plt.locator_params(nbins=20, axis='y')
 plt.suptitle('Memory Consumption', fontsize=14, fontweight='bold')

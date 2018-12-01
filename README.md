@@ -13,6 +13,17 @@ For some reason, a few of the key functionalities of the script are not supporte
 
 The chrome-driver executable must be added to your PATH. The Chrome browser must also be installed included in PATH.
 
+#### Debian Notes
+If you run into issues setting up Selenium follow the instructions on this page:
+  https://tecadmin.net/setup-selenium-with-chromedriver-on-debian/
+
+Tkinter may also need to be installed. If so, install it using the following command:
+
+```bash
+apt-get install python-tk
+```
+
+
 ### Running the tool
 
 In the root directory there is a selenium powered python script named metrics.py. This script takes an input of either a URL or a path to local web page file (absolute or relative). It then loads the page in a new instance of Chrome and computes the time it took to load. 

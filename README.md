@@ -5,6 +5,7 @@
 It is recommended that *virtualenv* is used when installing necessary dependencies. All python dependencies are listed in the requirements.txt file located in the root directory. Note this package is meant to run using Python 2.7. To install all dependencies execute:
 
 ```bash
+pip install --upgrade pip # may need to upgrade pip first (optional)
 pip install -r requirements.txt 
 ```
 

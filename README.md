@@ -11,7 +11,15 @@ pip install -r requirements.txt
 
 For some reason, a few of the key functionalities of the script are not supported or properly handled by the most recent version of chrome-driver. It's possible this could change, but so far the only known version of chrome-driver compatible with this script is **2.26**, which can be found [here](https://chromedriver.storage.googleapis.com/index.html?path=2.26/).
 
-The chrome-driver executable must be added to your PATH. The Chrome browser must also be installed included in PATH.
+The chrome-driver executable must be added to your PATH. The Chrome browser must also be installed included in PATH. (If running on a Mac follow the Mac chromedriver installation notes.
+
+#### Mac Notes
+It is recommened to use Homebrew to install chromedriver:
+```bash
+homebrew install chromedriver
+brew tap homebrew/cask
+brew cask install chromedriver
+```
 
 #### Debian Notes
 If you run into issues setting up Selenium follow the instructions on this page:

@@ -58,6 +58,9 @@ python metrics.py --file_path ./index.html
 
 ![](./example.png)
 
+### Debug Notes
+If any of the scripts run on the target page implement anti-debugging features that involve interfering with the console.log() function, this module will not run properly. 
+
 ### Chrome Extension Details
 
 Google Chrome (and only Google Chrome) provides a JavaScript object called *window.performance.memory* which contains info on the current status of the windows heap. More details can be found [here](https://webplatform.github.io/docs/apis/timing/properties/memory/). The chrome extension uses this to gather heap data statics over a set period of time. 
